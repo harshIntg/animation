@@ -1,0 +1,348 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Cinzel", serif;
+  scroll-behavior: smooth;
+  user-select: none;
+}
+body {
+  background-color: black;
+  padding: 0 24px;
+}
+
+/* Custom Cursor CSS */
+.cursorBox {
+  position: fixed;
+  display: none;
+  pointer-events: none;
+  top: -15px;
+  left: -15px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+  mix-blend-mode: difference;
+  z-index: 999;
+}
+.cursorChild {
+  position: fixed;
+  display: none;
+  pointer-events: none;
+  top: -25px;
+  left: -25px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid white;
+  mix-blend-mode: difference;
+  z-index: 9999;
+}
+.cursorCore {
+  position: fixed;
+  display: none;
+  pointer-events: none;
+  top: -4px;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: red;
+  z-index: 99999;
+}
+
+/* Navigation menu CSS */
+.linkBox {
+  /* backdrop-filter: blur(10px); */
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+}
+.linkBoxChild {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  padding: 24px;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.linkBox a {
+  color: white;
+  font-size: 24px;
+  font-weight: 400;
+  text-decoration: none;
+  mix-blend-mode: difference;
+}
+
+/* Sticky Scroll Container CSS */
+.scrollCont {
+  display: flex;
+  gap: 32px;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 140px 0;
+}
+.scrollLHS {
+  width: 50%;
+}
+.scrollRHS {
+  width: 50%;
+}
+.scrollRHS h3 {
+  position: sticky;
+  top: 70px;
+  font-size: 150px;
+  font-weight: 400;
+  color: white;
+}
+.scrollLHS p {
+  font-size: 34px;
+  font-weight: 400;
+  color: white;
+  margin-bottom: 100px;
+}
+.scrollLHS p:last-child {
+  margin-bottom: 0;
+}
+.stickyHeading {
+  font-size: 110px;
+  font-weight: 400;
+  color: white;
+  text-align: center;
+}
+
+/* Keyframe animation ----------- */
+
+.lableCont {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 150px;
+}
+label {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 18px 34px 18px 22px;
+  background-color: rgb(43 43 43);
+  border-radius: 150px;
+  margin: 10px;
+  user-select: none;
+  font-family: sans-serif;
+  cursor: pointer;
+}
+label input {
+  width: 60px;
+  height: 60px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 50%;
+  outline: none;
+}
+label div:has(input:checked) {
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.2);
+}
+label span {
+  font-size: 64px;
+  color: #eeeeee;
+  line-height: 45px;
+  font-weight: 400;
+}
+label div {
+  width: 60px;
+  height: 60px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 50%;
+  overflow: hidden;
+}
+@keyframes inpAnime {
+  0% {
+    box-shadow: none;
+  }
+  25% {
+    box-shadow: 0 0 0 1rem rgba(13, 110, 253, 0.3);
+  }
+  40% {
+    box-shadow: 0 0 0 0.4rem rgba(13, 110, 253, 0.2);
+  }
+  55% {
+    box-shadow: 0 0 0 1.2rem rgba(13, 110, 253, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 0.5rem rgba(13, 110, 253, 0.05);
+  }
+  100% {
+    box-shadow: 0 0 0 1.1rem rgba(13, 110, 253, 0.6);
+  }
+}
+label:hover div {
+  animation: inpAnime 0.7s linear;
+}
+
+/* Gradient Animation CSS */
+
+#gradientAnime {
+  color: black;
+  font-size: 120px;
+  font-weight: 500;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+  transition: 1s linear;
+  background-image: radial-gradient(circle at 50% 50%, white -50%, black 100%);
+}
+#gradientAnime p {
+  color: black;
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.scrollAnimation {
+  transform: translateY(100%);
+  opacity: 0;
+  overflow: hidden;
+}
+
+/* Horizontal scrolling */
+
+.scroller2Box {
+  overflow: hidden;
+}
+.scroller2 {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 24px 0;
+}
+.scroller2 h3 {
+  font-size: 84px;
+  color: #eeeeee;
+  font-weight: 400;
+  animation: txtAnime 3s linear infinite;
+  padding-right: 24px;
+}
+@keyframes txtAnime {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.freepara {
+  font-size: 54px;
+  color: #eeeeee;
+  font-weight: 400;
+  max-width: 1200px;
+  margin: 80px auto;
+  text-align: center;
+}
+
+/* Footer CSS */
+
+footer {
+  background-color: white;
+  padding: 100px 32px;
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  overflow: hidden;
+}
+footer div {
+  width: 50%;
+  max-width: 800px;
+}
+footer div a {
+  color: black;
+  text-decoration: none;
+  font-size: 40px;
+  font-weight: 400;
+  display: inline-block;
+  margin-bottom: 44px;
+}
+footer div p {
+  color: black;
+  font-size: 100px;
+  font-weight: 400;
+  line-height: 80px;
+}
+#contactTxt {
+  font-size: 140px;
+  line-height: 100px;
+  font-weight: 400;
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 80px 0 160px 0;
+  position: relative;
+  text-decoration: none;
+}
+.contactTxtSpan {
+  display: inline-block;
+  transition: 0.5s;
+}
+.contactTxtSpace {
+  width: 40px;
+  display: inline-block;
+}
+#contactTxt::after {
+  content: "";
+  position: absolute;
+  background-color: white;
+  height: 1px;
+  width: 0;
+  bottom: -5px;
+  left: 0;
+  transition: 0.8s;
+}
+#contactTxt:hover::after {
+  width: 100%;
+}
+.typedBox {
+  color: white;
+  font-size: 120px;
+  font-weight: 400;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+#typed-text {
+  color: rgb(137, 255, 40);
+  font-size: 120px;
+  font-weight: 400;
+  text-decoration: underline;
+  text-underline-offset: 10px;
+  text-decoration-thickness: 1px;
+}
+.typer {
+  background-color: rgb(137, 255, 40);
+  height: 116px;
+  width: 3px;
+  display: inline-block;
+  margin: 0 0 -19px 0;
+  animation: typer 0.8s linear infinite;
+}
+@keyframes typer {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

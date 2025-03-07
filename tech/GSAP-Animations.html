@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Horizontal Scroll on Vertical Scroll</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://assets.codepen.io/16327/ScrollSmoother.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Cursor box -->
+    <div class="cursor"></div>
+    <!-- Menu Bar -->
+    <nav>
+      <button type="button" class="cursorLink">Home</button>
+      <button type="button" class="cursorLink" id="scrollBtn">About</button>
+      <button type="button" class="cursorLink">Work</button>
+      <button type="button" class="cursorLink">Hire</button>
+    </nav>
+    <div class="smooth-wrapper">
+      <div class="smooth-content">
+        <!-- Main Heading -->
+        <h1 data-speed="2">Lorem ipsum dolor sit amet consectetur elit.</h1>
+        <!-- Horizontal Scroller -->
+        <div class="wrapper">
+          <div class="scroll-container">
+            <div class="imgBox">
+              <img src="img1.jpg" />
+              <div>
+                <h3>Lorem ipsum dolor sit amet.</h3>
+                <a href="#">Button View</a>
+              </div>
+            </div>
+            <div class="imgBox">
+              <img src="img2.jpg" />
+              <div>
+                <h3>Lorem ipsum dolor sit amet.</h3>
+                <a href="#">Button View</a>
+              </div>
+            </div>
+            <div class="imgBox">
+              <img src="img3.jpg" />
+              <div>
+                <h3>Lorem ipsum dolor sit amet.</h3>
+                <a href="#">Button View</a>
+              </div>
+            </div>
+            <div class="imgBox">
+              <img src="img4.jpg" />
+              <div>
+                <h3>Lorem ipsum dolor sit amet.</h3>
+                <a href="#">Button View</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Paragraph -->
+        <h3 data-speed="0.85">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
+          natus perferendis voluptatum commodi eveniet nisi mollitia, quisquam
+          fugit! Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </h3>
+        <!-- Hello lerp txt -->
+        <div id="targetElement" class="hlloTxt target">
+          <span data-speed="1.25">H</span>
+          <span data-speed="1.2">E</span>
+          <span data-speed="1.15">L</span>
+          <span data-speed="1.1">L</span>
+          <span>O</span>
+        </div>
+        <!-- Parallax boxes -->
+        <div style="padding: 0 40px">
+          <div class="imgPara">
+            <img src="img1.jpg" alt="..." data-speed="0.7" />
+            <h3 data-speed="1.2">Lorem ipsum dolor sit amet.</h3>
+          </div>
+          <div class="imgPara">
+            <img src="img2.jpg" alt="..." data-speed="0.7" />
+            <h3 data-speed="1.2">Lorem ipsum dolor sit amet.</h3>
+          </div>
+          <div class="imgPara">
+            <img src="img3.jpg" alt="..." data-speed="0.7" />
+            <h3 data-speed="1.2">Lorem ipsum dolor sit amet.</h3>
+          </div>
+        </div>
+        <!-- Parallax boxes -->
+        <div>
+          <div class="flexCont">
+            <!-- LHS -->
+            <div>
+              <img src="img2.jpg" alt="..." data-speed="0.6" />
+            </div>
+            <!-- RHS -->
+            <section>
+              <h3 data-speed="1.4">
+                consectetur adipisicing elit. Molestias repellat adipisc
+              </h3>
+              <h3 data-speed="1.4">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              </h3>
+              <h3 data-speed="1.4">Molestias repellat adipisci sed?</h3>
+            </section>
+          </div>
+          <div class="flexCont">
+            <section>
+              <h3 data-speed="1.4">
+                consectetur adipisicing elit. Molestias repellat adipisc
+              </h3>
+              <h3 data-speed="1.4">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              </h3>
+              <h3 data-speed="1.4">Molestias repellat adipisci sed?</h3>
+            </section>
+            <div>
+              <img src="img1.jpg" alt="..." data-speed="0.6" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      gsap.registerPlugin(ScrollTrigger, ScrollSmoother, ScrollToPlugin);
+
+      // Smooth Scroll --------------
+      ScrollSmoother.create({
+        wrapper: ".smooth-wrapper",
+        content: ".smooth-content",
+        smooth: 1.8,
+        effects: true,
+      });
+
+      // Horizontal Scroll --------
+      let scrollWidth = document.querySelector(".scroll-container").scrollWidth;
+      let viewportWidth = window.innerWidth;
+      let scrollAmount = scrollWidth - viewportWidth;
+      gsap.to(".scroll-container", {
+        x: -scrollAmount,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".wrapper",
+          start: "bottom bottom",
+          end: () => `+=${scrollAmount}`,
+          scrub: 1,
+          pin: true,
+        },
+      });
+
+      // Scroll on click -----------
+      document.getElementById("scrollBtn").addEventListener("click", () => {
+        gsap.to(window, {
+          scrollTo: "#targetElement",
+        });
+      });
+
+      // Using quickTo -----
+      const moveX = gsap.quickTo(".cursor", "x", {
+        duration: 0.2,
+      });
+      const moveY = gsap.quickTo(".cursor", "y", {
+        duration: 0.2,
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        gsap.to(".cursor", {
+          opacity: 1,
+          duration: 0.5,
+        });
+        moveX(e.clientX);
+        moveY(e.clientY);
+        if (e.target.closest(".cursorLink")) {
+          gsap.to(".cursor", {
+            backgroundColor: "red",
+            width: 150,
+            height: 150,
+            top: -75,
+            left: -75,
+            duration: 0.3,
+          });
+        } else {
+          gsap.to(".cursor", {
+            backgroundColor: "white",
+            width: 30,
+            height: 30,
+            top: -15,
+            left: -15,
+            duration: 0.3,
+          });
+        }
+      });
+      document.addEventListener("mouseleave", () => {
+        gsap.to(".cursor", {
+          opacity: 0,
+          duration: 0.5,
+        });
+      });
+    </script>
+  </body>
+</html>

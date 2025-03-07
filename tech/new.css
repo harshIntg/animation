@@ -1,0 +1,11 @@
+.address-bottom-border {
+  border-bottom: 2px solid #ccc;
+  margin-bottom: 24px;
+}
+.address-bottom-border:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+.checkout-index-index .opc-wrapper .shipping-address-item {
+  border-bottom: none !important;
+}
